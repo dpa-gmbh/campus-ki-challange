@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HP-Taschenrechner</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="calculator">
+    <div id="stack"></div>
+    <input type="text" id="display" disabled>
+    <div class="buttons">
+        <button class="button-operator" onclick="clearStack()">C</button>
+        <button class="button-operator" onclick="operate('sqrt')">√</button>
+        <button class="button-operator" onclick="operate('pow')">^</button>
+        <button class="button-operator" onclick="operate('/')">/</button>
+        <button class="button-operator" onclick="operate('sin')">sin</button>
+        <button class="button-operator" onclick="operate('cos')">cos</button>
+        <button class="button-operator" onclick="operate('tan')">tan</button>
+        <button class="button-operator" onclick="operate('*')">*</button>
+        <button class="button-number" onclick="appendToDisplay('7')">7</button>
+        <button class="button-number" onclick="appendToDisplay('8')">8</button>
+        <button class="button-number" onclick="appendToDisplay('9')">9</button>
+        <button class="button-operator" onclick="operate('-')">-</button>
+        <button class="button-number" onclick="appendToDisplay('4')">4</button>
+        <button class="button-number" onclick="appendToDisplay('5')">5</button>
+        <button class="button-number" onclick="appendToDisplay('6')">6</button>
+        <button class="button-operator" onclick="operate('+')">+</button>
+        <button class="button-number" onclick="appendToDisplay('1')">1</button>
+        <button class="button-number" onclick="appendToDisplay('2')">2</button>
+        <button class="button-number" onclick="appendToDisplay('3')">3</button>
+        <button class="button-number zero" onclick="appendToDisplay('0')">0</button>
+        <button class="button-number" onclick="appendToDisplay('.')">.</button>
+        <button class="button-enter" onclick="enter()">Enter</button>
+        <button class="button-drop" onclick="drop()">Drop</button>
+    </div>
+</div>
+<script src="scripts.js"></script>
+</body>
+</html>

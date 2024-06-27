@@ -1,0 +1,109 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #000000; /* Schwarzer Hintergrund */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Passende Schriftart für HP Taschenrechner */
+}
+
+.calculator {
+    background-color: #f0f0f0; /* Grauer Hintergrund für den Taschenrechner */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    width: 320px; /* Breite des Taschenrechners */
+    text-align: center; /* Zentriert den Taschenrechner */
+    position: relative; /* Positionseinstellung für das HP-Logo */
+}
+
+#stack {
+    width: 100%;
+    height: 100px;
+    background-color: #e0e0e0;
+    margin-bottom: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    font-size: 1.2em;
+    white-space: pre-wrap;
+    text-align: right; /* Zahlen im Stack rechtsbündig anzeigen */
+}
+
+#stack span {
+    display: block; /* Jede Zahl auf eine neue Zeile setzen */
+}
+
+#display {
+    width: 100%;
+    height: 40px;
+    font-size: 1.5em;
+    text-align: right;
+    margin-bottom: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+    border: none; /* Keine Umrandung für das Display */
+    background-color: transparent; /* Transparenter Hintergrund für das Display */
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 Spalten für die Buttons */
+    grid-template-rows: repeat(5, 1fr); /* 5 Reihen für die Buttons */
+    gap: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 15px; /* Größe der Buttons anpassen */
+    font-size: 1.2em;
+    background-color: #d9d9d9; /* Hintergrundfarbe der Buttons */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Übergangseffekt für Hover */
+}
+
+button:hover {
+    background-color: #b3b3b3; /* Hintergrundfarbe der Buttons beim Überfahren */
+}
+
+.button-operator {
+    background-color: #ff9900; /* Farbe für Operator-Buttons */
+    color: white; /* Textfarbe für Operator-Buttons */
+}
+
+.button-number {
+    background-color: #666666; /* Farbe für Zahlen-Buttons */
+    color: white; /* Textfarbe für Zahlen-Buttons */
+}
+
+.button-enter {
+    background-color: #00cc66; /* Farbe für Enter-Button */
+    grid-row: 4 / span 2; /* Enter-Button über 2 Reihen */
+    grid-column: 4; /* Enter-Button in der letzten Spalte */
+    height: calc(100% + 10px); /* Höhe des Enter-Buttons anpassen */
+}
+
+.button-drop {
+    background-color: #ff3300; /* Farbe für Drop-Button */
+    color: white; /* Textfarbe für Drop-Button */
+}
+
+.zero {
+    grid-column: span 2; /* Breite der Null-Taste anpassen */
+}
+
+/* HP Logo */
+.calculator::after {
+    content: '';
+    background-image: url('hp_logo.png'); /* Pfad zum HP-Logo */
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50px; /* Breite des Logos */
+    height: 20px; /* Höhe des Logos */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}

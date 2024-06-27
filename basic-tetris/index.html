@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Tetris Game</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #a2f2ce; /* Arka plan rengi */
+      transition: background-color 0.5s ease;
+      font-family: Arial, sans-serif;
+    }
+    canvas {
+      border: 2px solid #fff;
+      background-color: #000;
+    }
+    .controls {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1;
+      color: #fff;
+    }
+    .restart-button {
+      margin-bottom: 10px;
+      padding: 8px 16px;
+      background-color: #f00;
+      border: none;
+      cursor: pointer;
+    }
+    .color-button {
+      padding: 8px 16px;
+      background-color: #00f;
+      border: none;
+      cursor: pointer;
+    }
+    .game-over {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: rgba(255, 0, 0, 0.8);
+      color: #fff;
+      font-size: 24px;
+      display: none;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+<canvas id="tetris" width="200" height="400"></canvas>
+<div class="controls">
+  <button class="restart-button">Start Game</button>
+  <button class="color-button">Change Background</button>
+</div>
+<div class="game-over" id="game-over">
+  Game Over!
+</div>
+
+<script>
+  const canvas = document.getElementById('tetris');
+  const context = canvas.getContext('2d');
+  const grid = 20;
+  let count = 0;
+  let tetrisGrid = Array.from({ length: 20 }, () => Array(10).fill(0));
+  let gameOver = false;
+
+  const blockColor = '#ccc'; // Blok arka plan rengi
+
+  function drawSquare(x, y, color) {
+    context.fillStyle = color;
+    context.fillRect(x * grid, y * grid, grid, grid);
+    context.strokeStyle = blockColor; // Blok kenarlık rengi
+    context.strokeRect(x * grid, y * grid, grid, grid);
+  }
+
+  function drawBoard() {
+    tetrisGrid.forEach((row, y) => {
+      row.forEach((value, x) => {
+        drawSquare(x, y, value === 0 ? '#000' : value);
+      });
+    });
+  }
+
+  const pieces = [
+    [[1, 1, 1, 1]], // I
+    [[1, 1, 1], [0, 1, 0]], // T
+    [[1, 1, 1], [1, 0, 0]], // L
+    [[1, 1, 1], [0, 0, 1]], // J
+    [[1, 1], [1, 1]], // O
+    [[1, 1, 0], [0, 1, 1]] // Z
+  ];
+
+  const colors = [
+    '#00ffff', // Cyan
+    '#ff00ff', // Magenta
+    '#ffff00', // Yellow
+    '#00ff00', // Lime
+    '#ff0000', // Red
+    '#0000ff'  // Blue
+  ];
+
+  let piece = pieces[Math.floor(Math.random() * pieces.length)];
+  let color = colors[Math.floor(Math.random() * colors.length)];
+
+  let x = 4;
+  let y = 0;
+
+  function drawPiece() {
+    piece.forEach((row, rowIndex) => {
+      row.forEach((value, columnIndex) => {
+        if (value > 0) {
+          drawSquare(x + columnIndex, y + rowIndex, color);
+        }
+      });
+    });
+  }
+
+  function movePiece() {
+    y++;
+    if (collision()) {
+      y--;
+      mergePiece();
+      piece = pieces[Math.floor(Math.random() * pieces.length)];
+      color = colors[Math.floor(Math.random() * colors.length)];
+      x = 4;
+      y = 0;
+      if (collision()) {
+        gameOver = true;
+        showGameOver();
+      }
+    }
+  }
+
+  function collision() {
+    return piece.some((row, rowIndex) => {
+      return row.some((value, columnIndex) => {
+        return value > 0 && (tetrisGrid[y + rowIndex] && tetrisGrid[y + rowIndex][x + columnIndex]) !== 0;
+      });
+    });
+  }
+
+  function mergePiece() {
+    piece.forEach((row, rowIndex) => {
+      row.forEach((value, columnIndex) => {
+        if (value > 0) {
+          tetrisGrid[y + rowIndex][x + columnIndex] = color;
+        }
+      });
+    });
+
+    // Check for complete rows and clear them
+    tetrisGrid = tetrisGrid.filter(row => !row.every(cell => cell !== 0));
+    while (tetrisGrid.length < 20) {
+      tetrisGrid.unshift(Array(10).fill(0));
+    }
+  }
+
+  function restartGame() {
+    tetrisGrid = Array.from({ length: 20 }, () => Array(10).fill(0));
+    piece = pieces[Math.floor(Math.random() * pieces.length)];
+    color = colors[Math.floor(Math.random() * colors.length)];
+    x = 4;
+    y = 0;
+    gameOver = false;
+    hideGameOver();
+  }
+
+  function changeBackgroundColor() {
+    const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+    document.body.style.backgroundColor = randomColor;
+  }
+
+  function gameLoop() {
+    if (!gameOver) {
+      count++;
+      if (count === 20) {
+        movePiece();
+        count = 0;
+      }
+      drawBoard();
+      drawPiece();
+      requestAnimationFrame(gameLoop);
+    }
+  }
+
+  function showGameOver() {
+    const gameOverElement = document.getElementById('game-over');
+    gameOverElement.style.display = 'block';
+    const restartButton = document.querySelector('.restart-button');
+    restartButton.textContent = 'Restart Game';
+  }
+
+  function hideGameOver() {
+    const gameOverElement = document.getElementById('game-over');
+    gameOverElement.style.display = 'none';
+    const restartButton = document.querySelector('.restart-button');
+    restartButton.textContent = 'Start Game';
+  }
+
+  gameLoop();
+
+  const restartBtn = document.querySelector('.restart-button');
+  const colorBtn = document.querySelector('.color-button');
+
+  restartBtn.addEventListener('click', () => {
+    restartGame();
+  });
+
+  colorBtn.addEventListener('click', () => {
+    changeBackgroundColor();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (!gameOver) {
+      if (event.keyCode === 37) {
+        // Left arrow key
+        x--;
+        if (collision()) {
+          x++;
+        }
+      } else if (event.keyCode === 39) {
+        // Right arrow key
+        x++;
+        if (collision()) {
+          x--;
+        }
+      } else if (event.keyCode === 40) {
+        // Down arrow key
+        y++;
+        if (collision()) {
+          y--;
+        }
+      } else if (event.keyCode === 38) {
+        // Up arrow key (rotate piece)
+        rotatePiece();
+      }
+    } else {
+      // If game over, allow 'Enter' key to restart game
+      if (event.keyCode === 13) {
+        restartGame();
+      }
+    }
+  });
+
+  function rotatePiece() {
+    const rotatedPiece = piece[0].map((_, columnIndex) =>
+            piece.map((row) => row[columnIndex]).reverse()
+    );
+    if (!collision(rotatedPiece)) {
+      piece = rotatedPiece;
+    }
+  }
+</script>
+</body>
+</html>

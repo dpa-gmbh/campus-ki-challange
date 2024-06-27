@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic 8 Ball</title>
+    <style>
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .magic-8-ball {
+            position: relative;
+            width: 50vmin;
+            height: 50vmin;
+            background: radial-gradient(circle at 30% 30%, #000, #333 80%);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .magic-8-ball.shake {
+            animation: shake 0.5s;
+        }
+        .window {
+            position: relative;
+            width: 50%;
+            height: 50%;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: inset -5px -5px 10px rgba(255, 255, 255, 0.3),
+            inset 5px 5px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .answer {
+            text-align: center;
+            color: #000;
+            font-family: Arial, sans-serif;
+            font-size: 2.5vmin;
+            font-weight: bold;
+            padding: 10%;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #000;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+<div class="magic-8-ball" id="magicBall">
+    <div class="window">
+        <div class="answer" id="answer">YES</div>
+    </div>
+</div>
+<div class="button-container">
+    <button onclick="askMagic8Ball()">Ask the Magic 8 Ball</button>
+</div>
+
+<script>
+    function askMagic8Ball() {
+        const answers = [
+            "It is certain", "It is decidedly so", "Without a doubt", "Yes – definitely", "You may rely on it",
+            "As I see it, yes", "Most likely", "Outlook good", "Yes", "Signs point to yes",
+            "Reply hazy, try again", "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again",
+            "Don't count on it", "My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"
+        ];
+        const randomIndex = Math.floor(Math.random() * answers.length);
+        document.getElementById('answer').textContent = answers[randomIndex];
+
+        const magicBall = document.getElementById('magicBall');
+        magicBall.classList.add('shake');
+        setTimeout(() => {
+            magicBall.classList.remove('shake');
+        }, 500);
+    }
+</script>
+</body>
+</html>

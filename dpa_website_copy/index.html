@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dpa Deutsche Presse-Agentur – Den Fakten verpflichtet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 20px;
+        }
+
+        header img {
+            height: 50px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-right a,
+        .header-right button {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .header-right a:hover,
+        .header-right button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .search-icon,
+        .menu-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 80px auto 20px auto; /* Adjusted for fixed header */
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        section h2 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        section p {
+            margin-bottom: 20px;
+        }
+
+        section a {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        footer nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        footer nav ul li {
+            margin: 0 10px;
+        }
+
+        footer nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .footer-info ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-info ul li {
+            margin: 0 10px;
+        }
+
+        .footer-info p {
+            margin: 10px 0 0;
+        }
+
+        .testimonial {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .testimonial img {
+            border-radius: 50%;
+            margin-right: 20px;
+            width: 80px;
+            height: 80px;
+        }
+
+        .testimonial blockquote {
+            margin: 0;
+            font-style: italic;
+        }
+
+        .testimonial footer {
+            font-weight: bold;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="header-content">
+        <img src="https://www.dpa.com/logo.png" alt="dpa Logo">
+        <nav>
+            <ul>
+                <li><a href="#angebote">Angebote</a></li>
+                <li><a href="#ueber-uns">Über uns</a></li>
+                <li><a href="#karriere">Karriere</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+        </nav>
+        <div class="header-right">
+            <a href="#anmelden">Anmelden</a>
+            <button><img src="https://www.dpa.com/icons/search.png" alt="Search" class="search-icon"></button>
+            <button><img src="https://www.dpa.com/icons/menu.png" alt="Menu" class="menu-icon"></button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section id="highlights">
+        <h2>Im Fokus: Junge Zielgruppen</h2>
+        <p>Wir feiern 75 Jahre dpa!</p>
+        <a href="https://www.dpa75.com">Zur Jubiläums-Website</a>
+
+        <h2>Deutsche Presse-Agentur</h2>
+        <p>Den Fakten verpflichtet</p>
+        <a href="#ueber-uns">Mehr über uns</a>
+    </section>
+
+    <section id="angebote">
+        <h2>Angebote</h2>
+        <p>Ein Marktplatz für Medien und Kommunikation</p>
+        <a href="#angebotkatalog">Zum Angebotskatalog</a>
+    </section>
+
+    <section id="news">
+        <h2>Neuigkeiten</h2>
+        <ul>
+            <li><a href="https://www.presseportal.de">Daniel Schöningh zum neuen Vorsitzenden des dpa-Aufsichtsrates gewählt - David Brandstätter aus dem Gremium ausgeschieden</a></li>
+            <li><a href="https://www.presseportal.de">dpa-Gruppe setzt Wachstumskurs im Geschäftsjahr 2023 fort - 75 Jahre unabhängiger Agenturjournalismus</a></li>
+            <li><a href="https://www.dpa-shop.com">Live Widgets zu den Neuwahlen in Frankreich und Großbritannien</a></li>
+            <li><a href="https://www.presseportal.de">Gemeinsam gegen Klima-Desinformation: dpa und europäische Partner starten FactCRICIS-Projekt</a></li>
+            <li><a href="https://www.presseportal.de">dpa beteiligt sich an Kampagne zur Sensibilisierung für KI-generierte Inhalte vor den Europawahlen</a></li>
+            <li><a href="https://innovation.dpa.com">SEO und KI: Wie können ChatGPT und Co. bei der Suchmaschinenoptimierung helfen?</a></li>
+        </ul>
+    </section>
+
+    <section id="jahr-der-nachricht">
+        <h2>Jahr der Nachricht 2024</h2>
+        <h3>Geschäftsbericht 2023</h3>
+        <p>Die dpa präsentiert für 2023 positive Geschäftszahlen. Der Umsatz der Unternehmensgruppe konnte trotz eines herausfordernden Marktumfeldes auf fast 166 Millionen Euro gesteigert werden. Mit gut 104 Millionen Euro gelang auch der Kerngesellschaft dpa GmbH ein Umsatzwachstum.</p>
+        <a href="https://geschaeftsbericht.dpa.com">Zum Geschäftsbericht</a>
+    </section>
+
+    <section id="projekte-und-initiativen">
+        <h2>Projekte und Initiativen</h2>
+        <h3>Gemeinsam gegen Desinformation</h3>
+        <p>Verschwörungsmythen und gezielte Desinformations-Kampagnen stellen die Medien vor große Herausforderungen. Als unabhängige Nachrichtenagentur und Gemeinschaftsunternehmen der deutschen Medien sehen wir es als unsere Aufgabe, Standards im Bereich Faktencheck zu etablieren und zu vermitteln.</p>
+        <a href="https://www.dpa.com/faktencheck">Faktencheck bei dpa</a>
+    </section>
+
+    <section id="stimmen-aus-der-dpa">
+        <h2>Stimmen aus der dpa</h2>
+        <div class="testimonial">
+            <img src="https://www.dpa.com/images/miriam-schmidt.jpg" alt="Miriam Schmidt">
+            <blockquote>
+                <p>Was trendet in den Sozialen Medien? Was bewegt die Menschen? Was davon muss Eingang in unsere Berichterstattung finden? Tracking, Themen, Tempo – das sind die Koordinaten für die dpa.</p>
+                <footer>- Miriam Schmidt, Sportredakteurin</footer>
+            </blockquote>
+        </div>
+        <div class="testimonial"></div>
+    </section>
+</main>
+</body>
+</html>

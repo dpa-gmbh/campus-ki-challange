@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Magic 8 Ball</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0; /* Body background color */
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="button-container">
+    <button onclick="askMagic8Ball()">Ask the Magic 8 Ball</button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+    let scene, camera, renderer, ball, answerText;
+
+    function init() {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0xd3d3d3); // Light gray canvas background color
+        document.body.appendChild(renderer.domElement);
+
+        const textureLoader = new THREE.TextureLoader();
+        const ballTexture = textureLoader.load('path/to/A_seamless_3D_texture_of_a_black_billiard_ball_wit.png');
+
+        const geometry = new THREE.SphereGeometry(5, 32, 32);
+        const material = new THREE.MeshStandardMaterial({ map: ballTexture });
+        ball = new THREE.Mesh(geometry, material);
+        scene.add(ball);
+
+        const textGeometry = new THREE.PlaneGeometry(3, 3);
+        const textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        answerText = new THREE.Mesh(textGeometry, textMaterial);
+        answerText.position.set(0, 0, 5.1);
+        scene.add(answerText);
+
+        const light = new THREE.DirectionalLight(0xffffff, 1);
+        light.position.set(1, 1, 1).normalize();
+        scene.add(light);
+
+        camera.position.z = 10;
+
+        animate();
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        ball.rotation.y += 0.01;
+        renderer.render(scene, camera);
+    }
+
+    function askMagic8Ball() {
+        const answers = [
+            "It is certain", "It is decidedly so", "Without a doubt", "Yes – definitely", "You may rely on it",
+            "As I see it, yes", "Most likely", "Outlook good", "Yes", "Signs point to yes",
+            "Reply hazy, try again", "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again",
+            "Don't count on it", "My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"
+        ];
+        const randomIndex = Math.floor(Math.random() * answers.length);
+        const answer = answers[randomIndex];
+
+        const canvas = document.createElement('canvas');
+        canvas.width = 256;
+        canvas.height = 256;
+        const context = canvas.getContext('2d');
+        context.fillStyle = 'black';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = 'white';
+        context.font = '20px Arial';
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        context.fillText(answer, canvas.width / 2, canvas.height / 2);
+
+        const texture = new THREE.CanvasTexture(canvas);
+        answerText.material.map = texture;
+        answerText.material.needsUpdate = true;
+    }
+
+    init();
+</script>
+</body>
+</html>
